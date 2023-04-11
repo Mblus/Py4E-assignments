@@ -1,0 +1,99 @@
+#_______________________________________________________________________________________________________________________
+#__________________________________________________Documentation________________________________________________________
+#_______________________________________________________________________________________________________________________
+#Gavin Haroche, date:               4/11/2023
+#Assignment:                        Battleship
+#Versions:                          0.3 problem one complete
+#                                   0.6 problem two complete
+#                                   1.0 problem three complete
+
+#Bonuses:                           None
+#problem one prints the largest email sender
+#problem two prints the dates of emails sent
+#problem three prints and ranks the most popular characters in the list
+
+def problem1():
+    dictionary = dict()
+    days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
+    file = open("shakespear.txt", encoding="utf8")
+    for line in file:                                                                                                   #go through each line
+        if "from" in line:                                                                                              #if the line has, from, @, and days of the week
+            if "@" in line:
+                for object in days:
+                    if object in line:
+
+                        #print(line.split()[1])
+
+                        if line.split()[1] not in dictionary:                                                           #add it to the dictionary, or add one to the dictionary
+                            dictionary[line.split()[1]] = 1
+                        else:
+                            dictionary[line.split()[1]] += 1
+    print(max(dictionary))                                                                                              #print the largest item in the dictionary.
+    return
+def problem2():
+
+    file = open("shakespear.txt", encoding="utf8")
+    days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
+
+    array1 = []
+    array2 = []
+
+    for word in file:
+        for item in days:                                                                                               #for loops that go through every single word in the file.
+            if item in word:
+                if len(word.split()) <= 6:                                                                              #if it is this length, and it meets these characteristics, add it to an array.
+                    array1.append(word.split())
+                else:
+                    pass
+
+    for i in range(len(array1)):
+
+        array2.append(array1[i][4].split(":")[0])                                                                       #cleaning up the data and appending it to array two
+        array2.append(array1[i][1])
+        print(array2)
+        
+
+        array2.clear()
+
+
+    return
+def problem3():
+    alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    dictionary= dict()
+    file = open("shakespear.txt", encoding="utf8")
+
+    for item in file:
+        for object in item:
+            if object in alphabet:                                                                                      #go through every character
+                if object not in dictionary:
+                    dictionary[object] = 1                                                                              #assign a dictionary spot per character.
+                else:
+                    dictionary[object] += 1
+            else:
+                pass
+    myKeys = list(dictionary.keys())                                                                                    #sorting the dictionary so the most used letter is on top.
+    myKeys.sort()
+    sorted_dict = {i: dictionary[i] for i in myKeys}
+
+    #result = sorted(array1, key=array1.count, reverse=True)
+    print(sorted_dict)
+
+
+
+
+
+
+
+    return
+
+choice = input("Do you want to run problem 1, '1'. problem 2, '2', problem 3, '3'?")
+if choice == "1":
+    problem1()
+elif choice == "2":
+    problem2()
+else:
+    problem3()
+
+
+
+
